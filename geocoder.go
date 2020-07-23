@@ -47,6 +47,9 @@ type Location struct {
 // Format an address based on the Address structure
 // Return the formated address (string)
 func (address *Address) FormatAddress() string {
+	if address.FormattedAddress != "" {
+		return address.FormattedAddress
+	}
 
 	// Creats a slice with all content from the Address struct
 	var content []string
