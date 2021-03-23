@@ -6,6 +6,7 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 
@@ -150,7 +151,8 @@ func Geocoding(address Address) (Location, error) {
 
 	// Convert whitespaces to +
 	formattedAddress := address.FormatAddress()
-	formattedAddress = strings.Replace(formattedAddress, " ", "+", -1)
+	// Fix: # character
+	formattedAddress = url.QueryEscape(formattedAddress)
 
 	// Create the URL based on the formated address
 	url := geocodeApiUrl + "address=" + formattedAddress
